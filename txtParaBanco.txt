@@ -1,0 +1,46 @@
+DELIMITER $$
+CREATE PROCEDURE listar_categoria (IN var_id INT)
+BEGIN
+	IF var_id IS NULL THEN
+	    SELECT * FROM categoria;
+	ELSE
+	    SELECT * FROM categoria WHERE id = var_id;
+	END IF;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+
+-- Procedure para Cliente
+CREATE PROCEDURE listar_cliente (IN var_id INT)
+BEGIN
+    IF var_id IS NULL THEN
+        SELECT id, nome, email FROM cliente;
+    ELSE
+        SELECT id, nome, email FROM cliente WHERE id = var_id;
+    END IF;
+END$$
+
+-- Procedure para Fornecedor
+CREATE PROCEDURE listar_fornecedor (IN var_id INT)
+BEGIN
+    IF var_id IS NULL THEN
+        SELECT id, nome, cidade FROM fornecedor;
+    ELSE
+        SELECT id, nome, cidade FROM fornecedor WHERE id = var_id;
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- Testes Cliente
+CALL listar_cliente(NULL); -- Lista todos
+CALL listar_cliente(1);    -- Lista apenas o ID 1
+
+-- Testes Fornecedor
+CALL listar_fornecedor(NULL); -- Lista todos
+CALL listar_fornecedor(1);    -- Lista apenas o ID 1
+
+-- PARA CHAMAR/TEST:
+CALL listar_categoria(NULL);
+CALL listar_categoria(1);
